@@ -1,0 +1,11 @@
+Django==2.1.1 ¡Ì
+jieba==0.42.1 ¡Ì
+lxml==4.5.0 ¡Ì
+matplotlib==3.2.1 ¡Ì
+mysqlclient==1.4.6 ¡Ì
+numpy==1.18.2 ¡Ì
+Pillow==7.0.0 ¡Ì
+PyMySQL==0.9.3 ¡Ì
+requests==2.23.0 ¡Ì
+wordcloud==1.7.0  ¡Ì
+

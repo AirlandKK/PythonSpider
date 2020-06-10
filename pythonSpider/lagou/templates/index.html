@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    首页
+{% endblock %}
+
+{% block content %}
+    <h3>欢迎来到首页</h3>
+    <p>即将为您展示我的成果</p>
+    <div class="container" style="margin: 50px;">
+        <table class="table table-bordered table-hover" id="tb">
+            <thead>
+            <tr>
+                <th>职位名称</th>
+                <th>公司名称</th>
+                <th>公司规模</th>
+                <th>学历需求</th>
+                <th>工作经验</th>
+                <th>所需技能</th>
+                <th>工资待遇</th>
+                <th>所在城市</th>
+                <th>职位发布时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for i in obj %}
+                    <tr>
+                        <td>{{ i.positionName }}</td>
+                        <td>{{ i.companyFullName }}</td>
+                        <td>{{ i.companySize }}</td>
+                        <td>{{ i.education }}</td>
+                        <td>{{ i.workYear }}</td>
+                        <td>{{ i.skillLables }}</td>
+                        <td>{{ i.salary }}</td>
+                        <td>{{ i.address }}</td>
+                        <td>{{ i.createTime }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+        $("#tb").bootstrapTable({
+            pagination: true,   //是否显示分页条
+            pageSize: 10,   //一页显示的行数
+            paginationLoop: false,   //是否开启分页条无限循环，最后一页时点击下一页是否转到第一页
+            pageList: [20,  40,  60]   //选择每页显示多少行，数据过少时可能会没有效果
+        });
+    </script>
+{% endblock %}

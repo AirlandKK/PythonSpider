@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="../static/bootstrap-3.3.7-dist/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap-table.css">
+    <script src="/static/bootstrap-table.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/echarts.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<header class="navbar navbar-static-top bs-docs-nav" id="top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">首页</a>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/fenxi/">岗位分析</a>
+                </li>
+                <li>
+                    <a href="/ciyun/">技能词云</a>
+                </li>
+                <li>
+                    <a href="/ciyun2/">城市词云</a>
+                </li>
+            </ul>
+{#            <ul class="nav navbar-nav navbar-right">#}
+{#                <li><a href="" target="_blank">Bootstrap中文网</a></li>#}
+{#            </ul>#}
+        </nav>
+    </div>
+</header>
+<div class="container bs-docs-container">
+    <div class="row">
+        <div class="col-md-9" role="main">
+            <div class="bs-docs-section">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% block js %}
+{% endblock %}
+</body>
+</html>
