@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block title %}
+    分析2
+{% endblock %}
+
+{% block content %}
+    <h3>数据分析岗位-可视化展示</h3>
+    <p>即将为您展示我的成果</p>
+    <div id="main" style="width: 100%;height:400px;"></div>
+    <hr>
+    <div id="main1" style="width: 100%;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var myChart1 = echarts.init(document.getElementById('main1'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '数据分析岗位-需求量城市分布',
+                subtext: '来源：拉勾网前50页数据',
+                left: 'center'
+            },
+            tooltip: {},
+            legend: {
+                data: ['']
+            },
+            xAxis: {
+                data: {{ dataAnalysis|safe }}
+            },
+            yAxis: {},
+            series: [{
+                name: '需求量',
+                type: 'bar',
+                data: {{ dataAnalysis_count }},
+                backgroundStyle: {
+                   color: 'rgba(220, 220, 220, 0.8)'
+                },
+                itemStyle: {
+                    normal: {
+　　　　　　　　　　　　　　//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                              '#C1232B','#B5C334','#98fccd','#E87C25','#27727B',
+
+                               '#FE8463','#9BCA63','#98fccd','#F3A43B','#60C0DD',
+
+                               '#D7504B','#C6E579','#98fccd','#F0805A','#26C0C0'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+　　　　　　　　　　　　　　//以下为是否显示，显示位置和显示格式的设置了
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
+                showBackground: true,
+                {#data: [5, 20, 36, 10, 10, 20]#}
+            }]
+        };
+
+
+        var data = echarts.dataTool.prepareBoxplotData([
+            {{ bj_sala|safe }},
+            {{ sh_sala|safe }},
+            {{ gz_sala|safe }},
+            {{ sz_sala|safe }},
+            {{ hz_sala|safe }},
+
+        ]);
+
+        option1 = {
+            title: [
+                {
+                    text: '数据分析岗位-城市月薪分布',
+                    left: 'center',
+                },
+
+            ],
+            tooltip: {
+                trigger: 'item',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '10%',
+                right: '10%',
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.axisData,
+                boundaryGap: true,
+                nameGap: 30,
+                splitArea: {
+                    show: false
+                },
+                data: ['北京', '上海', '广州', '深圳', '杭州'],
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'k月薪',
+                splitArea: {
+                    show: true
+                }
+            },
+            series: [
+                {
+                    name: 'boxplot',
+                    type: 'boxplot',
+                    data: data.boxData,
+                    tooltip: {
+                        formatter: function (param) {
+                            return [
+                                'Experiment ' + param.name + ': ',
+                                'upper: ' + param.data[5],
+                                'Q3: ' + param.data[4],
+                                'median: ' + param.data[3],
+                                'Q1: ' + param.data[2],
+                                'lower: ' + param.data[1]
+                            ].join('<br/>');
+                        }
+                    }
+                },
+                {
+                    name: 'outlier',
+                    type: 'scatter',
+                    data: data.outliers
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        myChart1.setOption(option1);
+    </script>
+{% endblock %}
