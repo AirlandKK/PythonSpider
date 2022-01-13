@@ -4,7 +4,7 @@ lxml==4.5.0
 matplotlib==3.2.1
 mysqlclient==1.4.6
 numpy==1.18.2
-Pillow==7.0.0
+Pillow==9.0.0
 PyMySQL==0.9.3
 requests==2.23.0
 wordcloud==1.7.0
